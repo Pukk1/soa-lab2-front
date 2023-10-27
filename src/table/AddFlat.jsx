@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {fetchAddById} from "../utils/flats/api";
+import {fetchAdd} from "../utils/flats/api";
 
 const AddFlat = ({updateContent}) => {
 
@@ -15,7 +15,7 @@ const AddFlat = ({updateContent}) => {
     const [cost, setCost] = useState("")
 
     const onCreateButtonClick = () => {
-        fetchAddById({
+        fetchAdd({
             // id: id,
             name: name,
             coordinates: coordinates,

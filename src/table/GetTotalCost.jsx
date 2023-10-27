@@ -3,16 +3,13 @@ import {fetchAgencyGetTotalCost} from "../utils/agency/api";
 
 const GetTotalCost = () => {
 
-    const [value, setValue] = useState("")
 
-    const onSubmitClick = () => {
-        fetchAgencyGetTotalCost(setValue)
+    const onButtonClick = () => {
+        fetchAgencyGetTotalCost()
     }
 
     return <div>
-        <textarea value={value}></textarea>
-
-        <button onClick={onSubmitClick}>Submit</button>
+        <button onClick={onButtonClick}>Get Total Cost</button>
     </div>
 }
 

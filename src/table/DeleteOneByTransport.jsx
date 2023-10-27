@@ -6,7 +6,8 @@ const DeleteOneByTransport = ({updateContent}) => {
     const [transport, setTransport] = useState("")
 
     const onButtonClick = () => {
-        fetchDeleteOneByTransport(transport).then(r => updateContent())
+        fetchDeleteOneByTransport(transport)
+            .then(r => updateContent())
     }
 
     return <div>

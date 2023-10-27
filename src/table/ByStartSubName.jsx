@@ -11,6 +11,7 @@ const ByStartSubName = ({updateContent, setFlats}) => {
 
     const onResetButtonClick = () => {
         updateContent()
+        setSubname("")
     }
 
     return <div>
