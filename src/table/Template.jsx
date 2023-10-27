@@ -18,17 +18,18 @@ function Template() {
     const [currentPage, setCurrentPage] = useState(0)
     const [pagesNumber, setPagesNumber] = useState(0)
     const [sortBy, setSortBy] = useState({field: "id", order: "asc"})
+    const [filters, setFilters] = useState("")
     const [flats, setFlats] = useState([])
 
     const updateContent = () => {
-        fetchFlats(setFlats, setPagesNumber, sortBy, currentPage);
+        fetchFlats(setFlats, setPagesNumber, sortBy, currentPage, filters);
     }
 
     useEffect(() => {
         updateContent()
     }, [currentPage, sortBy]);
 
-    let onSortClick = (field) => {
+    const onSortClick = (field) => {
         if (field === sortBy.field) {
             if (sortBy.order === "asc") {
                 setSortBy({field: sortBy.field, order: "desc"})
@@ -42,43 +43,62 @@ function Template() {
 
     return (
         <div>
+            <div className="overflow-x-auto">
+                <table className="table">
+                    <thead>
+                    <tr>
+                        {
+                            [
+                                "id",
+                                "name",
+                                "coordinates.x",
+                                "coordinates.y",
+                                "creationDate",
+                                "area",
+                                "numberOfRooms",
+                                "furnish",
+                                "view",
+                                "transport",
+                                "house.name",
+                                "house.year",
+                                "house.numberOfFlatsOnFloor",
+                                "cost"
+                            ].map(it => (
+                                <th onClick={() => onSortClick(it)}>{it}</th>
+                            ))
+                        }
+                    </tr>
+                    </thead>
+                    <TableContent content={flats}/>
+                </table>
+            </div>
+            <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesNumber={pagesNumber}/>
+
             <FindById flats={flats} setFlats={setFlats} updateContent={updateContent}/>
-            <table>
-                <thead>
-                <tr>
-                    {
-                        [
-                            "id",
-                            "name",
-                            "coordinates.x",
-                            "coordinates.y",
-                            "creationDate",
-                            "area",
-                            "numberOfRooms",
-                            "furnish",
-                            "view",
-                            "transport",
-                            "house.name",
-                            "house.year",
-                            "house.numberOfFlatsOnFloor",
-                            "cost"
-                        ].map(it => (
-                            <th onClick={() => onSortClick(it)}>{it}</th>
-                        ))
-                    }
-                </tr>
-                </thead>
-                <TableContent content={flats}/>
-                <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesNumber={pagesNumber}/>
-                <DeleteById updateContent={updateContent}/>
-                <AddFlat updateContent={updateContent}/>
-                <UpdateFlat updateContent={updateContent}/>
-                <DeleteOneByTransport updateContent={updateContent}/>
-                <AllNumberOFRoomsSum updateContent={updateContent}/>
-                <ByStartSubName updateContent={updateContent} setFlats={setFlats}/>
-                <GetCheapest setFlats={setFlats} updateContent={updateContent}/>
-                <GetTotalCost/>
-            </table>
+
+            <details className="dropdown">
+                <summary className="m-1 btn">Filters</summary>
+                <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                    <li>
+                        <div>
+                            <div>
+                                <textarea placeholder={"filters"} value={filters}
+                                          onChange={e => setFilters(e.target.value)}/>
+                            </div>
+                            <button className={"btn btn-outline btn-success"} onClick={updateContent}>Use filters
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </details>
+            <DeleteById updateContent={updateContent}/>
+            <AddFlat updateContent={updateContent}/>
+            <UpdateFlat updateContent={updateContent}/>
+            <DeleteOneByTransport updateContent={updateContent}/>
+            <ByStartSubName updateContent={updateContent} setFlats={setFlats}/>
+            <GetCheapest setFlats={setFlats} updateContent={updateContent}/>
+            <AllNumberOFRoomsSum updateContent={updateContent}/>
+            <GetTotalCost/>
         </div>
     )
 }

@@ -10,11 +10,22 @@ const DeleteOneByTransport = ({updateContent}) => {
             .then(r => updateContent())
     }
 
-    return <div>
-        <span>Delete one by transport</span>
-        <textarea value={transport} onChange={e => setTransport(e.target.value)} placeholder={"transport"}/>
-        <button onClick={onButtonClick}>Delete one by transport</button>
-    </div>
+    return <details className="dropdown">
+        <summary className="m-1 btn">Delete one by transport</summary>
+        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+            <li>
+                <div>
+                    <h1>Delete one by transport</h1>
+                    <div>
+                        <textarea value={transport} onChange={e => setTransport(e.target.value)}
+                                  placeholder={"transport"}/>
+                    </div>
+                    <button className="btn btn-outline btn-warning" onClick={onButtonClick}>Delete one by transport
+                    </button>
+                </div>
+            </li>
+        </ul>
+    </details>
 }
 
 export default DeleteOneByTransport

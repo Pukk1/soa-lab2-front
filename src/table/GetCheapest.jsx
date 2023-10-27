@@ -16,13 +16,22 @@ const GetCheapest = ({setFlats, updateContent}) => {
         updateContent()
     }
 
-    return <div>
-        <textarea placeholder={"id-1"} value={id1} onChange={e=>setId1(e.target.value)}></textarea>
-        <textarea placeholder={"id-2"} value={id2} onChange={e=>setId2(e.target.value)}></textarea>
+    return <details className="dropdown">
+        <summary className="m-1 btn">Get cheapest</summary>
+        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+            <li>
+                <div>
+                    <div>
+                        <textarea placeholder={"id-1"} value={id1} onChange={e => setId1(e.target.value)}></textarea>
+                        <textarea placeholder={"id-2"} value={id2} onChange={e => setId2(e.target.value)}></textarea>
+                    </div>
 
-        <button onClick={onFindClick}>find</button>
-        <button onClick={onResetClick}>reset</button>
-    </div>
+                    <button className={"btn btn-outline btn-success"} onClick={onFindClick}>find</button>
+                    <button className="btn btn-outline btn-warning" onClick={onResetClick}>Reset</button>
+                </div>
+            </li>
+        </ul>
+    </details>
 }
 
 export default GetCheapest

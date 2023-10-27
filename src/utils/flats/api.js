@@ -2,13 +2,22 @@ import makeFetch from "../makeFetch";
 
 const BASE_FLATS_SERVICE_URL = "https://localhost:8080"
 
-export const fetchFlats = async (setFlats, setPageNumber, sortBy, currentPage) => {
+export const fetchFlats = async (setFlats, setPageNumber, sortBy, currentPage, filter) => {
     const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats");
-    let params = null
+    let params = {page: null, size: null, sort: null}
+    if (filter !== "") {
+        params = {page: null, size: null, sort: null, filters: null}
+        params.filters = filter
+    }
+
     if (sortBy.order === "desc") {
-        params = {page: currentPage, size: 2, sort: sortBy.field + " desc"}
+        params.page = currentPage
+        params.size = 10
+        params.sort = sortBy.field + " desc"
     } else {
-        params = {page: currentPage, size: 2, sort: sortBy.field}
+        params.page = currentPage
+        params.size = 10
+        params.sort = sortBy.field
     }
 
     try {
@@ -32,7 +41,8 @@ export const fetchFlatById = async (value, setFlats) => {
 export const fetchDeleteById = async (value) => {
     if (value !== "") {
         const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats/" + value);
-        await makeFetch(url, {method: 'DELETE'}, response => {})
+        await makeFetch(url, {method: 'DELETE'}, response => {
+        })
     }
 }
 

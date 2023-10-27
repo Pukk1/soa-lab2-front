@@ -10,12 +10,11 @@ const Pagination = ({currentPage, setCurrentPage, pagesNumber}) => {
     }
 
     return <div>
-        <button
-            onClick={() => onNextBackButtonClick(false)}>Back
-        </button>
-        <button
-            onClick={() => onNextBackButtonClick(true)}>Next
-        </button>
+        <div className="join">
+            <button className="join-item btn" onClick={() => onNextBackButtonClick(false)}>«</button>
+            <button className="join-item btn">Page +-1</button>
+            <button className="join-item btn" onClick={() => onNextBackButtonClick(true)}>»</button>
+        </div>
     </div>
 }
 

@@ -9,11 +9,19 @@ const DeleteById = ({updateContent}) => {
             .then(r => updateContent())
     }
 
-    return <div>
-        <span>delete by id</span>
-        <textarea placeholder={"id"} value={value} onChange={e => setValue(e.target.value)}/>
-        <button onClick={onDeleteButtonClick}>delete</button>
-    </div>
+    return <details className="dropdown">
+        <summary className="m-1 btn">Delete by id</summary>
+        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+            <li>
+                <div>
+                    <div>
+                        <textarea placeholder={"id"} value={value} onChange={e => setValue(e.target.value)}/>
+                    </div>
+                    <button className="btn btn-outline btn-warning" onClick={onDeleteButtonClick}>Delete</button>
+                </div>
+            </li>
+        </ul>
+    </details>
 }
 
 export default DeleteById
