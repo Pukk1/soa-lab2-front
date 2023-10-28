@@ -1,10 +1,10 @@
 import {useState} from "react";
 import {fetchAllNumberOfRoomsSum} from "../utils/flats/api";
 
-const AllNumberOFRoomsSum = ({updateContent}) => {
+const AllNumberOFRoomsSum = ({updateContent, alertWithMessage}) => {
 
     const onButtonClick = () => {
-        fetchAllNumberOfRoomsSum().then(r => updateContent())
+        fetchAllNumberOfRoomsSum(alertWithMessage).then(r => updateContent())
     }
 
     return <details className="dropdown">

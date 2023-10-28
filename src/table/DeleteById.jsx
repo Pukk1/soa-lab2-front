@@ -1,11 +1,11 @@
 import {useState} from "react";
 import {fetchDeleteById} from "../utils/flats/api";
 
-const DeleteById = ({updateContent}) => {
+const DeleteById = ({updateContent, alertWithMessage}) => {
     const [value, setValue] = useState("")
 
     const onDeleteButtonClick = () => {
-        fetchDeleteById(value)
+        fetchDeleteById(value, alertWithMessage)
             .then(r => updateContent())
     }
 

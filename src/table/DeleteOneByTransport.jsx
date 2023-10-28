@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {fetchDeleteOneByTransport} from "../utils/flats/api";
 
-const DeleteOneByTransport = ({updateContent}) => {
+const DeleteOneByTransport = ({updateContent, alertWithMessage}) => {
 
     const [transport, setTransport] = useState("")
 
     const onButtonClick = () => {
-        fetchDeleteOneByTransport(transport)
+        fetchDeleteOneByTransport(transport, alertWithMessage)
             .then(r => updateContent())
     }
 

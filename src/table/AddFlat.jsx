@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {fetchAdd} from "../utils/flats/api";
 
-const AddFlat = ({updateContent}) => {
+const AddFlat = ({updateContent, alertWithMessage}) => {
 
     // const [id, setId] = useState("")
     const [name, setName] = useState("")
@@ -26,7 +26,7 @@ const AddFlat = ({updateContent}) => {
             transport: transport,
             house: house,
             cost: cost,
-        }).then(e => updateContent())
+        }, alertWithMessage).then(e => updateContent())
     }
 
     return <details className="dropdown">

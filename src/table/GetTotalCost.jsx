@@ -1,10 +1,10 @@
 import {fetchAgencyGetTotalCost} from "../utils/agency/api";
 
-const GetTotalCost = () => {
+const GetTotalCost = ({alertWithMessage}) => {
 
 
     const onButtonClick = () => {
-        fetchAgencyGetTotalCost()
+        fetchAgencyGetTotalCost(alertWithMessage)
     }
 
     return <details className="dropdown">

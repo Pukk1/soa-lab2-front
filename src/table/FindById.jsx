@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {fetchFlatById} from "../utils/flats/api";
 
-const FindById = ({flats, setFlats, updateContent}) => {
+const FindById = ({flats, setFlats, updateContent, alertWithMessage}) => {
 
     const [value, setValue] = useState("")
 
     const onFindClick = () => {
-        fetchFlatById(value, setFlats)
+        fetchFlatById(value, setFlats, alertWithMessage)
     }
 
     const onResetClick = () => {

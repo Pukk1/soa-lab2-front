@@ -2,7 +2,7 @@ import makeFetch from "../makeFetch";
 
 const BASE_FLATS_SERVICE_URL = "https://localhost:8080"
 
-export const fetchFlats = async (setFlats, setPageNumber, sortBy, currentPage, filter) => {
+export const fetchFlats = async (setFlats, setPageNumber, sortBy, currentPage, filter, alertWithMessage) => {
     const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats");
     let params = {page: null, size: null, sort: null}
     if (filter !== "") {
@@ -25,28 +25,28 @@ export const fetchFlats = async (setFlats, setPageNumber, sortBy, currentPage, f
         await makeFetch(url, {}, json => {
             setFlats(json["flats"])
             setPageNumber(json["pages"])
-        })
+        }, alertWithMessage)
     } catch (e) {
         console.log("error", e);
     }
 }
 
-export const fetchFlatById = async (value, setFlats) => {
+export const fetchFlatById = async (value, setFlats, alertWithMessage) => {
     if (value !== "") {
         const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats/" + value);
-        await makeFetch(url, {}, flat => setFlats([flat]))
+        await makeFetch(url, {}, flat => setFlats([flat]), alertWithMessage)
     }
 }
 
-export const fetchDeleteById = async (value) => {
+export const fetchDeleteById = async (value, alertWithMessage) => {
     if (value !== "") {
         const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats/" + value);
         await makeFetch(url, {method: 'DELETE'}, response => {
-        })
+        }, alertWithMessage)
     }
 }
 
-export const fetchAdd = async (data) => {
+export const fetchAdd = async (data, alertWithMessage) => {
     if (data !== null) {
         const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats");
         await makeFetch(
@@ -59,12 +59,13 @@ export const fetchAdd = async (data) => {
                 body: JSON.stringify(data)
             },
             _ => {
-            }
+            },
+            alertWithMessage
         )
     }
 }
 
-export const fetchUpdateById = async (id, data) => {
+export const fetchUpdateById = async (id, data, alertWithMessage) => {
     if (id !== null && data !== null) {
         const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats/" + id);
         await makeFetch(
@@ -77,27 +78,28 @@ export const fetchUpdateById = async (id, data) => {
                 body: JSON.stringify(data)
             },
             _ => {
-            }
+            },
+            alertWithMessage
         )
     }
 }
 
-export const fetchDeleteOneByTransport = async (transport) => {
+export const fetchDeleteOneByTransport = async (transport, alertWithMessage) => {
     if (transport !== null) {
         const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats/delete-one-by-transport/" + transport);
         await makeFetch(url, {method: 'POST'}, _ => {
-        })
+        }, alertWithMessage)
     }
 }
 
-export const fetchAllNumberOfRoomsSum = async () => {
+export const fetchAllNumberOfRoomsSum = async (alertWithMessage) => {
     const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats/all-number-of-rooms-sum");
-    await makeFetch(url, {method: 'POST'}, resp => alert("All number of rooms sum: " + resp))
+    await makeFetch(url, {method: 'POST'}, resp => alertWithMessage("All number of rooms sum: " + resp), alertWithMessage)
 }
 
-export const fetchByStartSubName = async (subname, setFlats) => {
+export const fetchByStartSubName = async (subname, setFlats, alertWithMessage) => {
     if (subname !== null) {
         const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats/by-start-sub-name/" + subname);
-        await makeFetch(url, {method: 'POST'}, setFlats)
+        await makeFetch(url, {method: 'POST'}, setFlats, alertWithMessage)
     }
 }

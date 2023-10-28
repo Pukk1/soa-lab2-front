@@ -1,13 +1,13 @@
 import {useState} from "react";
 import {fetchAgencyGetCheapest} from "../utils/agency/api";
 
-const GetCheapest = ({setFlats, updateContent}) => {
+const GetCheapest = ({setFlats, updateContent, alertWithMessage}) => {
 
     const [id1, setId1] = useState("")
     const [id2, setId2] = useState("")
 
     const onFindClick = () => {
-        fetchAgencyGetCheapest(id1, id2, setFlats)
+        fetchAgencyGetCheapest(id1, id2, setFlats, alertWithMessage)
     }
 
     const onResetClick = () => {

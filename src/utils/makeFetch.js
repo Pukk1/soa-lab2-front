@@ -1,14 +1,14 @@
-const alertBadRequest = (response) => {
+const alertBadRequest = (response, alertWithMessage) => {
     response.json()
         .then(resp => {
                 let msg = response.status + ": " + resp["description"]
-                alert(msg)
+                alertWithMessage(msg)
                 console.log("error", msg);
             }
         )
 }
 
-const makeFetch = async (url, requestInit, ifSuccess) => {
+const makeFetch = async (url, requestInit, ifSuccess, alertWithMessage) => {
     await fetch(url, requestInit)
         .then(response => {
                 if (200 <= response.status && response.status < 300) {
@@ -19,7 +19,7 @@ const makeFetch = async (url, requestInit, ifSuccess) => {
                             .catch(resp => console.log(resp))
                     }
                 } else {
-                    alertBadRequest(response)
+                    alertBadRequest(response, alertWithMessage)
                 }
             }
         )

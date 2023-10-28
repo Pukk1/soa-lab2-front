@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {fetchByStartSubName} from "../utils/flats/api";
 
-const ByStartSubName = ({updateContent, setFlats}) => {
+const ByStartSubName = ({updateContent, setFlats, alertWithMessage}) => {
 
     const [subname, setSubname] = useState("")
 
     const onButtonClick = () => {
-        fetchByStartSubName(subname, setFlats)
+        fetchByStartSubName(subname, setFlats, alertWithMessage)
     }
 
     const onResetButtonClick = () => {

@@ -13,7 +13,7 @@ import GetCheapest from "./GetCheapest";
 import GetTotalCost from "./GetTotalCost";
 import {fetchFlats} from "../utils/flats/api";
 
-function Template() {
+const Template = ({alertWithMessage}) => {
 
     const [currentPage, setCurrentPage] = useState(0)
     const [pagesNumber, setPagesNumber] = useState(0)
@@ -22,7 +22,7 @@ function Template() {
     const [flats, setFlats] = useState([])
 
     const updateContent = () => {
-        fetchFlats(setFlats, setPagesNumber, sortBy, currentPage, filters);
+        fetchFlats(setFlats, setPagesNumber, sortBy, currentPage, filters, alertWithMessage);
     }
 
     useEffect(() => {
@@ -74,7 +74,7 @@ function Template() {
             </div>
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesNumber={pagesNumber}/>
 
-            <FindById flats={flats} setFlats={setFlats} updateContent={updateContent}/>
+            <FindById flats={flats} setFlats={setFlats} updateContent={updateContent} alertWithMessage={alertWithMessage}/>
 
             <details className="dropdown">
                 <summary className="m-1 btn">Filters</summary>
@@ -91,14 +91,14 @@ function Template() {
                     </li>
                 </ul>
             </details>
-            <DeleteById updateContent={updateContent}/>
-            <AddFlat updateContent={updateContent}/>
-            <UpdateFlat updateContent={updateContent}/>
-            <DeleteOneByTransport updateContent={updateContent}/>
-            <ByStartSubName updateContent={updateContent} setFlats={setFlats}/>
-            <GetCheapest setFlats={setFlats} updateContent={updateContent}/>
-            <AllNumberOFRoomsSum updateContent={updateContent}/>
-            <GetTotalCost/>
+            <DeleteById updateContent={updateContent} alertWithMessage={alertWithMessage}/>
+            <AddFlat updateContent={updateContent} alertWithMessage={alertWithMessage}/>
+            <UpdateFlat updateContent={updateContent} alertWithMessage={alertWithMessage}/>
+            <DeleteOneByTransport updateContent={updateContent} alertWithMessage={alertWithMessage}/>
+            <ByStartSubName updateContent={updateContent} setFlats={setFlats} alertWithMessage={alertWithMessage}/>
+            <GetCheapest setFlats={setFlats} updateContent={updateContent} alertWithMessage={alertWithMessage}/>
+            <AllNumberOFRoomsSum updateContent={updateContent} alertWithMessage={alertWithMessage}/>
+            <GetTotalCost alertWithMessage={alertWithMessage}/>
         </div>
     )
 }
