@@ -21,8 +21,36 @@ const Template = ({alertWithMessage}) => {
     const [filters, setFilters] = useState("")
     const [flats, setFlats] = useState([])
 
+    const [idFilter, setIdFilter] = useState("")
+    const [nameFilter, setNameIdFilter] = useState("")
+    const [coordinatesXFilter, setCoordinatesXFilter] = useState("")
+    const [coordinatesYFilter, setCoordinatesYFilter] = useState("")
+    const [creationDateFilter, setCreationDateFilter] = useState("")
+    const [areaFilter, setAreaFilter] = useState("")
+    const [numberOfRoomsFilter, setNumberOfRoomsFilter] = useState("")
+    const [furnishFilter, setFurnishFilter] = useState("")
+    const [viewFilter, setViewFilter] = useState("")
+    const [transportFilter, setTransportFilter] = useState("")
+    const [houseNameFilter, setHouseNameFilter] = useState("")
+    const [houseYearFilter, setHouseYearFilter] = useState("")
+    const [houseNumberOfFlatsOnFloorFilter, setHouseNumberOfFlatsOnFloorFilter] = useState("")
+    const [coastFilter, setCoastFilter] = useState("")
+
+    // const setFilter = (attribute, text) => {
+    //     set
+    // }
+
     const updateContent = () => {
-        fetchFlats(setFlats, setPagesNumber, sortBy, currentPage, filters, alertWithMessage);
+        let filt = ""
+        if (idFilter !== "") {
+            filt += idFilter + ","
+        }
+        if (nameFilter !== "") {
+            filt += idFilter + ","
+        }
+        filt = filt.slice(0, -1)
+        console.log(filt)
+        fetchFlats(setFlats, setPagesNumber, sortBy, currentPage, filt, alertWithMessage);
     }
 
     useEffect(() => {
@@ -74,7 +102,8 @@ const Template = ({alertWithMessage}) => {
             </div>
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} pagesNumber={pagesNumber}/>
 
-            <FindById flats={flats} setFlats={setFlats} updateContent={updateContent} alertWithMessage={alertWithMessage}/>
+            <FindById flats={flats} setFlats={setFlats} updateContent={updateContent}
+                      alertWithMessage={alertWithMessage}/>
 
             <details className="dropdown">
                 <summary className="m-1 btn">Filters</summary>
@@ -82,9 +111,39 @@ const Template = ({alertWithMessage}) => {
                     <li>
                         <div>
                             <div>
-                                <textarea placeholder={"filters"} value={filters}
-                                          onChange={e => setFilters(e.target.value)}/>
+                                <span>id</span>
+                                <textarea onChange={e => {
+                                    if (e.target.value !== "") {
+                                        console.log(e.target.value)
+                                        setIdFilter("id" + e.target.value)
+                                    } else {
+                                        setIdFilter("")
+                                    }
+                                }}/>
                             </div>
+                            <div>
+                                <span>name</span>
+                                <textarea onChange={e => {
+                                    if (e.target.value !== "") {
+                                        console.log(e.target.value)
+                                        setNameIdFilter("name" + e.target.value)
+                                    } else {
+                                        setIdFilter("")
+                                    }
+                                }}/>
+                            </div>
+                            {/*"coordinates.x",*/}
+                            {/*"coordinates.y",*/}
+                            {/*"creationDate",*/}
+                            {/*"area",*/}
+                            {/*"numberOfRooms",*/}
+                            {/*"furnish",*/}
+                            {/*"view",*/}
+                            {/*"transport",*/}
+                            {/*"house.name",*/}
+                            {/*"house.year",*/}
+                            {/*"house.numberOfFlatsOnFloor",*/}
+                            {/*"cost"*/}
                             <button className={"btn btn-outline btn-success"} onClick={updateContent}>Use filters
                             </button>
                         </div>
