@@ -1,6 +1,6 @@
 import makeFetch from "../makeFetch";
 
-const BASE_FLATS_SERVICE_URL = "https://localhost:8443/flat-service-0.0.1-SNAPSHOT"
+const BASE_FLATS_SERVICE_URL = "http://localhost:8082"
 
 export const fetchFlats = async (setFlats, setPageNumber, sortBy, currentPage, filter, alertWithMessage) => {
     const url = new URL(BASE_FLATS_SERVICE_URL + "/api/v1/flats");

@@ -1,6 +1,6 @@
 import makeFetch from "../makeFetch";
 
-const BASE_AGENCY_SERVICE_URL = "https://localhost:8084/agency-service"
+const BASE_AGENCY_SERVICE_URL = "http://localhost:8084/agency-service"
 
 
 export const fetchAgencyGetCheapest = async (id1, id2, setFlats, alertWithMessage) => {
