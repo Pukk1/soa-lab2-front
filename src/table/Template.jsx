@@ -155,7 +155,7 @@ const Template = ({alertWithMessage}) => {
             <UpdateFlat updateContent={updateContent} alertWithMessage={alertWithMessage}/>
             <DeleteOneByTransport updateContent={updateContent} alertWithMessage={alertWithMessage}/>
             <ByStartSubName updateContent={updateContent} setFlats={setFlats} alertWithMessage={alertWithMessage}/>
-            <GetCheapest setFlats={setFlats} updateContent={updateContent} alertWithMessage={alertWithMessage}/>
+            {/*<GetCheapest setFlats={setFlats} updateContent={updateContent} alertWithMessage={alertWithMessage}/>*/}
             <AllNumberOFRoomsSum updateContent={updateContent} alertWithMessage={alertWithMessage}/>
             <GetTotalCost alertWithMessage={alertWithMessage}/>
         </div>
